@@ -24,4 +24,20 @@ public class ClazzService
 		return clazzDao.create(clazz);
 	}
 
+	public Clazz getClazzById(Long id)
+	{
+		return clazzDao.get(id);
+	}
+
+	public void update(Clazz clazz)
+	{
+		clazzDao.update(clazz);
+	}
+
+	public void deleteClazzById(Long id)
+	{
+		clazzDao.delete(id);
+		
+	}
+
 }

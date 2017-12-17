@@ -1,5 +1,6 @@
 package com.rambert.assignment.dao.impl;
 
+import java.util.Collection;
 
 import com.rambert.assignment.dao.GenericDao;
 import com.rambert.assignment.dao.util.DbConnectionFactory;
@@ -15,24 +16,30 @@ public class GenericDaoImpl<T extends GenericModel> implements GenericDao<T>
 	}
 
 	@Override
-	public T get(Long id)
+	public T get(Class<T> type, Long id)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return DbConnectionFactory.getConnection().get(type, id);
+	}
+
+	@Override
+	public Collection<T> getAll(Class<T> type)
+	{
+		return DbConnectionFactory.getConnection().getAllByModel(type);
 	}
 
 	@Override
 	public void update(T transientObject)
 	{
-		// TODO Auto-generated method stub
+		T oldInstance = (T) DbConnectionFactory.getConnection().get(transientObject.getClass(),
+				transientObject.getId());
+		oldInstance.copyAttributes(transientObject);
 
 	}
 
 	@Override
-	public void delete(T persistentObject)
+	public void delete(Class<T> type, Long id)
 	{
-		// TODO Auto-generated method stub
-
+		DbConnectionFactory.getConnection().delete(type, id);
 	}
 
 }

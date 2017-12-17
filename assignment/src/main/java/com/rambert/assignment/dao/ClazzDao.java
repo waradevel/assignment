@@ -8,5 +8,9 @@ public interface ClazzDao extends GenericDao<Clazz>
 {
 
 	Collection<Clazz> getAllClazzes();
+	
+	Clazz get(Long id);
+	
+	void delete(Long id);
 
 }

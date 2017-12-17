@@ -32,9 +32,9 @@ public class FakeDbConnection implements DbConnection
 	}
 
 	@Override
-	public GenericModel get(String model, Long id)
+	public <T extends GenericModel> T get(Class<T> type, Long id)
 	{
-		return store.get(model).get(id);
+		return (T)store.get(type.getName()).get(id);
 	}
 
 	@Override
@@ -51,10 +51,9 @@ public class FakeDbConnection implements DbConnection
 	}
 
 	@Override
-	public void delete(GenericModel persistentObject)
+	public <T extends GenericModel> void delete(Class<T> type, Long id)
 	{
-		// TODO Auto-generated method stub
-
+		store.get(type.getName()).remove(id);
 	}
 
 	private Long nextIdGenerated()

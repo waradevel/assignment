@@ -90,4 +90,14 @@ public class Clazz implements GenericModel
 		return true;
 	}
 
+	@Override
+	public void copyAttributes(GenericModel model)
+	{
+		Clazz clazzModel = (Clazz) model;
+		this.setCode(clazzModel.getCode());
+		this.setTitle(clazzModel.getTitle());
+		this.setDescription(clazzModel.getDescription());
+
+	}
+
 }

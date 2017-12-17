@@ -9,12 +9,12 @@ public interface DbConnection
 	
 	Long insert(GenericModel newInstance);
 
-	GenericModel get(String model, Long id);
+	<T extends GenericModel> T get(Class<T> type, Long id);
 	
 	<T extends GenericModel> Collection<T> getAllByModel(Class<T> type);
 
 	void update(GenericModel transientObject);
 
-	void delete(GenericModel persistentObject);
+	<T extends GenericModel> void delete(Class<T> type, Long id);
 
 }
