@@ -17,7 +17,7 @@ public class ClazzDaoImpl extends GenericDaoImpl<Clazz> implements ClazzDao
 
 	@Autowired
 	private StudentDao studentDao;
-	
+
 	@Override
 	public Collection<Clazz> getAllClazzes()
 	{
@@ -41,8 +41,10 @@ public class ClazzDaoImpl extends GenericDaoImpl<Clazz> implements ClazzDao
 	{
 		Clazz clazz = get(Clazz.class, id);
 		Student student = studentDao.get(studentId);
-		Set<Student> students = clazz.getStudents();
+		Set<Student> students = clazz.getStudentsWithClasses();
 		students.add(student);
+		Set<Clazz> clazzes = student.getClazzesWithStudents();
+		clazzes.add(clazz);
 	}
 
 }

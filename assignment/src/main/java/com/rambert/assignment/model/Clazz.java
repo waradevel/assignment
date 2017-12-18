@@ -1,8 +1,12 @@
 package com.rambert.assignment.model;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties("studentsWithClasses") 
 public class Clazz implements GenericModel
 {
 	private static final long serialVersionUID = 9070903447056987290L;
@@ -52,9 +56,21 @@ public class Clazz implements GenericModel
 		this.description = description;
 	}
 
-	public Set<Student> getStudents()
+	public Set<Student> getStudentsWithClasses()
 	{
 		return students;
+	}
+
+	
+	public Set<Student> getStudents()
+	{
+		Set<Student> studentsToShow = new HashSet<>(students);
+		Set<Clazz> emptyList = new HashSet<>();
+		for(Student student : studentsToShow)
+		{
+			student.setClazzes(emptyList);
+		}
+		return studentsToShow;
 	}
 
 	public void setStudents(Set<Student> students)

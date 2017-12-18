@@ -3,6 +3,9 @@ package com.rambert.assignment.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties("clazzesWithStudents") 
 public class Student implements GenericModel
 {
 
@@ -44,9 +47,20 @@ public class Student implements GenericModel
 		this.firstName = firstName;
 	}
 
-	public Set<Clazz> getClazzes()
+	public Set<Clazz> getClazzesWithStudents()
 	{
 		return clazzes;
+	}
+	
+	public Set<Clazz> getClazzes()
+	{
+		Set<Clazz> clazzesToShow = new HashSet<>(clazzes);
+		Set<Student> emptyList = new HashSet<>();
+		for(Clazz clazz : clazzesToShow)
+		{
+			clazz.setStudents(emptyList);
+		}
+		return clazzesToShow;
 	}
 
 	public void setClazzes(Set<Clazz> clazzes)
