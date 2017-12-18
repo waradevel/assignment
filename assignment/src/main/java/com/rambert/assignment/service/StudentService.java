@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rambert.assignment.dao.StudentDao;
+import com.rambert.assignment.exception.EntityNotFoundException;
 import com.rambert.assignment.model.Student;
 
 @Service
@@ -16,7 +17,7 @@ public class StudentService
 
 	public Collection<Student> getAllStudents()
 	{
-		return studentDao.getAllStudents();
+		return studentDao.getAll();
 	}
 
 	public Long create(Student student)
@@ -24,12 +25,12 @@ public class StudentService
 		return studentDao.create(student);
 	}
 
-	public Student getStudentById(Long id)
+	public Student getStudentById(Long id) throws EntityNotFoundException
 	{
 		return studentDao.get(id);
 	}
 
-	public void update(Student student)
+	public void update(Student student) throws EntityNotFoundException
 	{
 		studentDao.update(student);
 	}

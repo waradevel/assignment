@@ -3,13 +3,16 @@ package com.rambert.assignment.controller;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rambert.assignment.exception.EntityNotFoundException;
 import com.rambert.assignment.model.Clazz;
 import com.rambert.assignment.service.ClazzService;
 
@@ -28,9 +31,18 @@ public class ClazzController
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Clazz getClazzById(@PathVariable("id") Long id)
+	public ResponseEntity<Clazz> getClazzById(@PathVariable("id") Long id)
 	{
-		return clazzService.getClazzById(id);
+		try
+		{
+			Clazz clazz = clazzService.getClazzById(id);
+			return new ResponseEntity<>(clazz, HttpStatus.OK);
+		}
+		catch (EntityNotFoundException e)
+		{
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -40,9 +52,18 @@ public class ClazzController
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateClazz(@RequestBody Clazz clazz)
+	public ResponseEntity<Void> updateClazz(@RequestBody Clazz clazz)
 	{
-		clazzService.update(clazz);
+		try
+		{
+			clazzService.update(clazz);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		catch (EntityNotFoundException e)
+		{
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@RequestMapping(value = "/{id}}", method = RequestMethod.DELETE)
@@ -52,9 +73,19 @@ public class ClazzController
 	}
 
 	@RequestMapping(value = "/{id}/student/{studentId}", method = RequestMethod.POST)
-	public void addStudentToClazz(@PathVariable("id") Long id, @PathVariable("studentId")Long studentId)
+	public ResponseEntity<Void> addStudentToClazz(@PathVariable("id") Long id,
+			@PathVariable("studentId") Long studentId)
 	{
-		clazzService.addStudentToClazz(id, studentId);
+		try
+		{
+			clazzService.addStudentToClazz(id, studentId);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		catch (EntityNotFoundException e)
+		{
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.rambert.assignment.exception.EntityNotFoundException;
 import com.rambert.assignment.model.GenericModel;
 
 public class FakeDbConnection implements DbConnection
@@ -32,9 +33,14 @@ public class FakeDbConnection implements DbConnection
 	}
 
 	@Override
-	public <T extends GenericModel> T get(Class<T> type, Long id)
+	public <T extends GenericModel> T get(Class<T> type, Long id) throws EntityNotFoundException
 	{
-		return (T)store.get(type.getName()).get(id);
+		Map<Long, GenericModel> map = store.get(type.getName());
+		if (map != null)
+		{
+			return (T) map.get(id);
+		}
+		throw new EntityNotFoundException("Entity not found, id:" + id);
 	}
 
 	@Override

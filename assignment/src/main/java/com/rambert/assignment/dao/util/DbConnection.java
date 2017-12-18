@@ -2,6 +2,7 @@ package com.rambert.assignment.dao.util;
 
 import java.util.Collection;
 
+import com.rambert.assignment.exception.EntityNotFoundException;
 import com.rambert.assignment.model.GenericModel;
 
 public interface DbConnection
@@ -9,7 +10,7 @@ public interface DbConnection
 	
 	Long insert(GenericModel newInstance);
 
-	<T extends GenericModel> T get(Class<T> type, Long id);
+	<T extends GenericModel> T get(Class<T> type, Long id) throws EntityNotFoundException;
 	
 	<T extends GenericModel> Collection<T> getAllByModel(Class<T> type);
 

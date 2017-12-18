@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rambert.assignment.dao.ClazzDao;
+import com.rambert.assignment.exception.EntityNotFoundException;
 import com.rambert.assignment.model.Clazz;
 
 @Service
@@ -16,7 +17,7 @@ public class ClazzService
 
 	public Collection<Clazz> getAllClazzes()
 	{
-		return clazzDao.getAllClazzes();
+		return clazzDao.getAll();
 	}
 
 	public Long create(Clazz clazz)
@@ -24,12 +25,12 @@ public class ClazzService
 		return clazzDao.create(clazz);
 	}
 
-	public Clazz getClazzById(Long id)
+	public Clazz getClazzById(Long id) throws EntityNotFoundException
 	{
 		return clazzDao.get(id);
 	}
 
-	public void update(Clazz clazz)
+	public void update(Clazz clazz) throws EntityNotFoundException
 	{
 		clazzDao.update(clazz);
 	}
@@ -40,7 +41,7 @@ public class ClazzService
 		
 	}
 
-	public void addStudentToClazz(Long id, Long studentId)
+	public void addStudentToClazz(Long id, Long studentId) throws EntityNotFoundException
 	{
 		clazzDao.addStudentToClazz(id, studentId);
 	}

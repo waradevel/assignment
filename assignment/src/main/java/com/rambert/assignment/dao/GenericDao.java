@@ -2,6 +2,7 @@ package com.rambert.assignment.dao;
 
 import java.util.Collection;
 
+import com.rambert.assignment.exception.EntityNotFoundException;
 import com.rambert.assignment.model.GenericModel;
 
 public interface GenericDao<T extends GenericModel>
@@ -9,12 +10,12 @@ public interface GenericDao<T extends GenericModel>
 
 	Long create(T newInstance);
 
-	T get(Class<T> type, Long id);
+	T get(Long id) throws EntityNotFoundException;
 	
-	Collection<T> getAll(Class<T> type);
+	Collection<T> getAll();
 
-	void update(T transientObject);
+	void update(T transientObject) throws EntityNotFoundException;
 
-	void delete(Class<T> type, Long id);
+	void delete(Long id);
 
 }
