@@ -3,7 +3,7 @@
 Spring boot, framework used to implement the project
 
 
-#Insert a Class
+# Insert a Class
 
 METHOD: POST, Content-Type=application/json
 
@@ -16,7 +16,7 @@ body example
     "description": "mat description"
 }
 
-#Insert a Student
+# Insert a Student
 
 Method: POST, Content-Type=application/json
 
@@ -43,16 +43,16 @@ Get one student by id 1
 localhost:8080/students/1
 
 
-#Assign a student to a class
+# Assign a student to a class
 
 Method: POST
 In the below example the student with id 3 is being assigned to class with id 1
 localhost:8080/classes/1/student/3
 
-#Requirements
+# Requirements
 java 1.8
 
-#Notes
+# Notes
 Ids for entities are auto generated.
 
 Compiling and running
