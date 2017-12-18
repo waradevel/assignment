@@ -13,4 +13,6 @@ public interface ClazzDao extends GenericDao<Clazz>
 	
 	void delete(Long id);
 
+	void addStudentToClazz(Long id, Long studentId);
+
 }

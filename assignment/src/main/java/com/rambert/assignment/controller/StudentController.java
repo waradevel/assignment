@@ -14,7 +14,7 @@ import com.rambert.assignment.model.Student;
 import com.rambert.assignment.service.StudentService;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController
 {
 

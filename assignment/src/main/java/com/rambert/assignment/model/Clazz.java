@@ -1,5 +1,8 @@
 package com.rambert.assignment.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Clazz implements GenericModel
 {
 	private static final long serialVersionUID = 9070903447056987290L;
@@ -7,6 +10,7 @@ public class Clazz implements GenericModel
 	private String code;
 	private String title;
 	private String description;
+	private Set<Student> students = new HashSet<>();
 
 	public Long getId()
 	{
@@ -46,6 +50,16 @@ public class Clazz implements GenericModel
 	public void setDescription(String description)
 	{
 		this.description = description;
+	}
+
+	public Set<Student> getStudents()
+	{
+		return students;
+	}
+
+	public void setStudents(Set<Student> students)
+	{
+		this.students = students;
 	}
 
 	@Override

@@ -40,4 +40,9 @@ public class ClazzService
 		
 	}
 
+	public void addStudentToClazz(Long id, Long studentId)
+	{
+		clazzDao.addStudentToClazz(id, studentId);
+	}
+
 }

@@ -45,10 +45,16 @@ public class ClazzController
 		clazzService.update(clazz);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}}", method = RequestMethod.DELETE)
 	public void deleteClazzById(@PathVariable("id") Long id)
 	{
 		clazzService.deleteClazzById(id);
+	}
+
+	@RequestMapping(value = "/{id}/student/{studentId}", method = RequestMethod.POST)
+	public void addStudentToClazz(@PathVariable("id") Long id, @PathVariable("studentId")Long studentId)
+	{
+		clazzService.addStudentToClazz(id, studentId);
 	}
 
 }
