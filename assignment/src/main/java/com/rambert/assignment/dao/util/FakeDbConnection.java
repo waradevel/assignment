@@ -1,5 +1,6 @@
 package com.rambert.assignment.dao.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +47,13 @@ public class FakeDbConnection implements DbConnection
 	@Override
 	public <T extends GenericModel> Collection<T> getAllByModel(Class<T> type)
 	{
-		return (Collection<T>) store.get(type.getName()).values();
+		Collection<T> allEntities = new ArrayList<>();
+		Map<Long, GenericModel> entities = store.get(type.getName());
+		if (entities != null)
+		{
+			allEntities = (Collection<T>) entities.values();
+		}
+		return allEntities;
 	}
 
 	@Override
